@@ -1,16 +1,19 @@
 <div class="container">
-    <div class="overlay"></div> <!--반짝이는 부분-->
-    <div class="card" style="background-image: url(mew.webp);"></div> <!-- 이미지 설정 -->
+    <div class="card" style="background-image: url(mew.webp);"> <!-- 이미지 설정 -->
+        <div class="overlay"></div> <!--반짝이는 부분-->
+    </div>
 </div>
 
 <div class="container">
-    <div class="overlay"></div>
-    <div class="card" style="background-image: url(pika.webp);"></div> <!-- 이미지 설정 -->
+    <div class="card" style="background-image: url(pika.webp);"> <!-- 이미지 설정 -->
+        <div class="overlay"></div> <!--반짝이는 부분-->
+    </div>
 </div>
 
 <div class="container">
-    <div class="overlay"></div>
-    <div class="card" style="background-image: url(rai.webp);"></div> <!-- 이미지 설정 -->
+    <div class="card" style="background-image: url(rai.webp);"> <!-- 이미지 설정 -->
+        <div class="overlay"></div> <!--반짝이는 부분-->
+    </div>        
 </div>
 
 
@@ -18,7 +21,7 @@
     var containers = document.querySelectorAll('.container') //querySelectorAll을 사용하여 모든 카드를 선택
     
     containers.forEach(function(container) { //forEach를 통해 각 카드마다 이벤트 리스너를 추가
-        var overlay = document.querySelector('.overlay')
+        var overlay = container.querySelector('.overlay') //container안에 overlay속성 넣었으므로, document가 아닌 container
 
         container.addEventListener('mousemove', function(e){
             var x = e.offsetX
