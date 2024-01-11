@@ -1,47 +1,64 @@
 <div class="container">
     <div class="overlay"></div> <!--반짝이는 부분-->
-    <div class="card"></div>
+    <div class="card" style="background-image: url(mew.webp);"></div> <!-- 이미지 설정 -->
+</div>
+
+<div class="container">
+    <div class="overlay"></div>
+    <div class="card" style="background-image: url(pika.webp);"></div> <!-- 이미지 설정 -->
+</div>
+
+<div class="container">
+    <div class="overlay"></div>
+    <div class="card" style="background-image: url(rai.webp);"></div> <!-- 이미지 설정 -->
 </div>
 
 
 <script>
-    var container = document.querySelector('.container')
-    var overlay = document.querySelector('.overlay')
+    var containers = document.querySelectorAll('.container') //querySelectorAll을 사용하여 모든 카드를 선택
+    
+    containers.forEach(function(container) { //forEach를 통해 각 카드마다 이벤트 리스너를 추가
+        var overlay = document.querySelector('.overlay')
 
-    container.addEventListener('mousemove', function(e){
-        var x = e.offsetX
-        var y = e.offsetY
-        // 마우스 좌표 출력하는 코드
-        // console.log(x, y);
+        container.addEventListener('mousemove', function(e){
+            var x = e.offsetX
+            var y = e.offsetY
+            // 마우스 좌표 출력하는 코드
+            // console.log(x, y);
 
-        var rotateY = -1/5 * x + 20 // a * x + b의 1차함수인데, (200, -20), (0, 20)을 지남.
-        var rotateX = 4/30 * y - 20
+            var rotateY = -1/5 * x + 20 // a * x + b의 1차함수인데, (200, -20), (0, 20)을 지남.
+            var rotateX = 4/30 * y - 20
 
-        overlay.style = `background-position : ${x/5 + y+5}%` //마우스 좌표가 움직일 때 마다, 반짝이는 필름 움직임.
+            overlay.style = `background-position : ${x/5 + y+5}%` //마우스 좌표가 움직일 때 마다, 반짝이는 필름 움직임.
 
-        // 마우스 x좌표 +200px일 때, rotateY를 -20 degree
-        // 마우스 x좌표 0px일 때, rotateY를 20 degree
-        container.style = `transform : perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)` //rotateX, rotateY라는 변수값을 넣음. (perspective를 추가해야 3D느낌으로 회전)
-    })
+            // 마우스 x좌표 +200px일 때, rotateY를 -20 degree
+            // 마우스 x좌표 0px일 때, rotateY를 20 degree
+            container.style = `transform : perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)` //rotateX, rotateY라는 변수값을 넣음. (perspective를 추가해야 3D느낌으로 회전)
+        })
 
-    container.addEventListener('mouseout', function(e){ 
-        // overlay와 container의 속성 변경
-        overlay.style.transition = 'all 0.5s ease'; // filter 대신 all을 사용하여 전체 속성에 대해 트랜지션을 적용
-        container.style.transition = 'transform 0.5s ease';
+        container.addEventListener('mouseout', function(e){ 
+            // overlay와 container의 속성 변경
+            overlay.style.transition = 'all 0.5s ease'; // filter 대신 all을 사용하여 전체 속성에 대해 트랜지션을 적용
+            container.style.transition = 'transform 0.5s ease';
 
-        // 일정 시간 후에 스타일 변경을 적용
-        setTimeout(function() {
-            overlay.style.filter = 'opacity(0)'; //투명도 0으로 설정
-            container.style.transform = 'perspective(350px) rotateX(0deg) rotateY(0deg)'; //회전값 초기화
-        }, 50); // 50ms 후에 스타일 변경 적용
-    })
+            // 일정 시간 후에 스타일 변경을 적용
+            setTimeout(function() {
+                overlay.style.filter = 'opacity(0)'; //투명도 0으로 설정
+                container.style.transform = 'perspective(350px) rotateX(0deg) rotateY(0deg)'; //회전값 초기화
+            }, 50); // 50ms 후에 스타일 변경 적용
+        })
+    })    
 </script>
 
 
 <style>
     .container {
-        width: 220px; height: 310px; transition : all 0.1s;
+        width: 220px; 
+        height: 310px; 
+        transition : all 0.1s;
         position: relative;
+        display: inline-block; /*가로로 카드가 쌓이도록*/
+        padding: 20px;
     }
     .overlay{
         position: absolute; /*공중에 떠있어야 하므로, position absolute*/
@@ -70,7 +87,7 @@
     }
     .card {
         width: 220px; height: 310px;
-        background-image: url(mew.webp);
+        /* background-image: url(mew.webp); */
         background-size: cover;
     }
 </style>
